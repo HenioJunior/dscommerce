@@ -1,5 +1,6 @@
 package com.heniojunior.dscommerce.entities;
 
+import com.heniojunior.dscommerce.dto.ProductDto;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -22,7 +23,7 @@ public class Product {
 
     private Double price;
 
-    private String imageUrl;
+    private String imgUrl;
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
@@ -36,12 +37,20 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, Double price, String imageUrl) {
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.imgUrl = imgUrl;
+    }
+
+    public Product(ProductDto dto) {
+        id = dto.getId();
+        name = dto.getName();
+        description = dto.getDescription();
+        price = dto.getPrice();
+        imgUrl = dto.getImgUrl();
     }
 
     public Long getId() {
@@ -60,8 +69,8 @@ public class Product {
         return price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
     public Set<Category> getCategories() {
