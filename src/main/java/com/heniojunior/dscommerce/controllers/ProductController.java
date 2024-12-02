@@ -38,4 +38,10 @@ public class ProductController {
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto dto) {
+        dto =  service.update(id, dto);
+        return ResponseEntity.ok(dto);
+    }
 }
